@@ -91,4 +91,21 @@ describe('generic', () => {
     simpleGeneric.setValue('Felix');
     expect(typeof simpleGeneric.getValue()).toBe('string');
   });
+
+  // 6. Generic Parameter Default
+  class GenericDefault<T = string> {
+    private value?: T;
+    setValue(value: T) {
+      this.value = value;
+    }
+    getValue(): T | undefined {
+      return this.value;
+    }
+  }
+
+  it('should have default parameter', () => {
+    const genericDefault = new GenericDefault();
+    genericDefault.setValue('Felix');
+    expect(genericDefault.getValue()?.toUpperCase()).toBe('FELIX');
+  });
 });
