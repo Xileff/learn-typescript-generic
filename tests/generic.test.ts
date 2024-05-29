@@ -4,6 +4,14 @@ describe('generic', () => {
     constructor(value: T) {
       this.value = value;
     }
+
+    getValue(): T {
+      return this.value;
+    }
+
+    setValue(value: T) {
+      this.value = value;
+    }
   }
 
   it('should support multiple data type', () => {
@@ -16,5 +24,21 @@ describe('generic', () => {
     dataString.value = 'Xilef'; // works
     // dataString.value = 123; // prevented
     expect(dataString.value.toUpperCase()).toBe('XILEF');
+  });
+
+  it('should support generic data type', () => {
+    function create<T>(data: T): T {
+      return data;
+    }
+
+    expect(create('Felix')).toBe('Felix');
+    expect(create(123)).toBe(123);
+  });
+
+  it('should be able to get and set', () => {
+    const dataGeneric = new GenericData<string>('Felix');
+    expect(dataGeneric.getValue()).toBe('Felix');
+    dataGeneric.setValue('Xilef');
+    expect(dataGeneric.getValue()).toBe('Xilef');
   });
 });
